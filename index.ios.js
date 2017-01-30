@@ -2,4 +2,4 @@ import { AppRegistry } from 'react-native';
 
 import setup from './src/setup';
 
-AppRegistry.registerComponent('StarterApp', setup);
+AppRegistry.registerComponent('MusicPlayer', setup);

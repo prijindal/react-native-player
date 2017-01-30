@@ -1,4 +1,4 @@
-package com.starterapp;
+package com.musicplayer;
 
 import android.app.Application;
 import android.util.Log;
