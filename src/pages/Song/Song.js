@@ -17,30 +17,34 @@ const styles = {
 class User extends Component {
   static propTypes = {
     navigator: PropTypes.shape({}).isRequired,
-    user: PropTypes.shape({
-      id: PropTypes.string,
-      title: PropTypes.string,
-      body: PropTypes.string,
-      avatar: PropTypes.string,
+    song: PropTypes.shape({
+      name: PropTypes.string,
+      path: PropTypes.string,
+      size: PropTypes.number,
     }).isRequired,
+    playSong: PropTypes.func.isRequired,
+  }
+
+  componentDidMount() {
+    this.props.playSong(this.props.song);
   }
 
   render() {
-    const { title, avatar, body } = this.props.user;
+    const { name, path, size } = this.props.song;
     return (
       <View>
-        <Image source={{ uri: avatar }} style={styles.avatar}>
+        {/* <Image source={{ uri: avatar }} style={styles.avatar}> */}
           <Layout
             enableBackButton
-            title={title}
+            title={name}
             titleColor={theme.darkText}
             toolbarStyle={styles.toolbar}
             actions={[]}
             onActionSelected={this.onActionSelected}
             navigator={this.props.navigator}
           />
-        </Image>
-        <Text style={styles.body}>{body}</Text>
+        {/* </Image> */}
+        <Text style={styles.body}>{path}</Text>
       </View>
     );
   }

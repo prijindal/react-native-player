@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { NavigationStyles, StackNavigation } from '@exponent/ex-navigation';
 import { DrawerLayoutAndroid, Dimensions, BackAndroid } from 'react-native';
 
+import PlayControls from '../PlayControls';
+
 import StatusBar from '../StatusBar';
 import Router from '../../Router';
 import SideBar from '../SideBar';
@@ -81,6 +83,7 @@ class AppNavigator extends Component {
           }}
           initialRoute={Router.getRoute('home')}
         />
+        <PlayControls />
       </DrawerLayoutAndroid>
     );
   }

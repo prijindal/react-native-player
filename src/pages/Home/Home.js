@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, ListView } from 'react-native';
+import { View, ListView, ScrollView } from 'react-native';
 import getFiles from '../../helpers/getFiles';
 
 import Layout from '../../components/Layout';
@@ -64,6 +64,10 @@ class Home extends Component {
     this._mounted = false;
   }
 
+  openSong = (file) => {
+    this.props.navigator.push('song', { song: file });
+  }
+
   render() {
     return (
       <View style={styles.view}>
@@ -72,13 +76,25 @@ class Home extends Component {
           onActionSelected={this.onActionSelected}
           navigator={this.props.navigator}
         />
+        {/* <ScrollView>
+          {this.props.songs.map(file =>
+            <ListItem
+              key={file.path}
+              item={{ title: file.name }}
+              length={this.props.songs.length}
+            />,
+          )}
+        </ScrollView> */}
         <ListView
           dataSource={this.state.dataSource}
+          initialListSize={30}
+          pageSize={1}
           renderRow={file =>
             <ListItem
               key={file.path}
               item={{ title: file.name }}
               length={this.props.songs.length}
+              onPress={() => this.openSong(file)}
             />
           }
         />
