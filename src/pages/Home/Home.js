@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ListView } from 'react-native';
+import getFiles from '../../helpers/getFiles';
 
 import Layout from '../../components/Layout';
 import ListItem from '../../components/ListItem';
 import theme from '../../themes/base-theme';
-import mockData from '../../../helpers/mockedData.json';
-// import mockData from './mockData';
+
 
 const styles = {
   view: {
@@ -26,98 +26,42 @@ const styles = {
 
 class Home extends Component {
   static propTypes = {
-    navigation: PropTypes.shape({
-      getNavigator: PropTypes.func,
-    }),
     navigator: PropTypes.shape({
       push: PropTypes.func,
     }).isRequired,
-    user: PropTypes.shape({
+    setSongs: PropTypes.func.isRequired,
+    songs: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
-    }).isRequired,
+      path: PropTypes.string,
+    })).isRequired,
   }
 
   state = {
     loading: false,
-    actions: [],
-    data: [],
+    dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+                            .cloneWithRows(this.props.songs),
   }
 
   componentWillMount() {
     this._mounted = true;
-    this.updateActions(this.props);
   }
 
   componentDidMount() {
-    setTimeout(
-      () => {
-        if (!this._mounted) return;
-        this.setState({
-          loading: false,
-          data: mockData,
-        });
-      },
-      0,
-    );
+    getFiles()
+    .then((files) => {
+      if (!this._mounted) return;
+      this.props.setSongs(files);
+    });
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this._mounted) {
-      this.updateActions(nextProps);
-    }
+    this.setState(prevState => ({
+      dataSource: prevState.dataSource.cloneWithRows(nextProps.songs),
+    }));
   }
 
   componentWillUnmount() {
     this._mounted = false;
-  }
-
-  onActionSelected = (position) => {
-    if (!this.props.user.name) {
-      if (position === 0) {
-        this.props.navigation.getNavigator('master').push('login');
-      }
-    } else if (position === 0) {
-      this.props.navigator.push('notifications');
-    } else if (position === 1) {
-      this.props.navigator.push('profile');
-    }
-  }
-
-  updateActions(props) {
-    let actions = [];
-    if (props.user.name) {
-      actions = [
-        ...actions,
-        {
-          title: 'Notifications',
-          iconName: 'notifications',
-          show: 'always',
-        },
-        {
-          title: 'Logout',
-          iconName: 'person-outline',
-          show: 'always',
-        },
-      ];
-    } else {
-      actions = [
-        ...actions,
-        {
-          title: 'Login',
-          iconName: 'person',
-          show: 'always',
-        },
-      ];
-    }
-    if (this._mounted) {
-      this.setState({
-        actions,
-      });
-    }
-  }
-
-  openUser(user) {
-    this.props.navigator.push('user', { user });
   }
 
   render() {
@@ -125,29 +69,19 @@ class Home extends Component {
       <View style={styles.view}>
         <Layout
           title="Home"
-          actions={this.state.actions}
           onActionSelected={this.onActionSelected}
           navigator={this.props.navigator}
         />
-        <ScrollView style={styles.list}>
-          {this.state.data.map(({ id, name, list }) =>
-            <View key={id}>
-              <View style={styles.subheader}>
-                <Text style={styles.subheaderText}>{name}</Text>
-              </View>
-              {
-                list.map((item, idx) =>
-                  <ListItem
-                    item={item}
-                    idx={idx}
-                    length={list.length}
-                    onPress={() => this.openUser(item)}
-                    key={item.id}
-                  />,
-              )}
-            </View>,
-          )}
-        </ScrollView>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={file =>
+            <ListItem
+              key={file.path}
+              item={{ title: file.name }}
+              length={this.props.songs.length}
+            />
+          }
+        />
       </View>
     );
   }

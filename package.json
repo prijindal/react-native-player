@@ -15,7 +15,7 @@
     "release": "npm run cleanApk && npm run assembleRelease && npm run signRelease && npm run alignRelease",
     "emulator": "emulator -avd NexusS",
     "installAndroid": "adb install android/app/build/outputs/apk/app-release.apk",
-    "intent": "adb shell am start -a android.intent.action.MAIN -n com.starterapp/.MainActivity"
+    "intent": "adb shell am start -a android.intent.action.MAIN -n com.musicplayer/.MainActivity"
   },
   "dependencies": {
     "@exponent/ex-navigation": "^2.7.1",
