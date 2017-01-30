@@ -3,6 +3,8 @@ package com.musicplayer;
 import android.os.Bundle;
 import android.view.WindowManager;
 import com.facebook.react.ReactActivity;
+import com.zmxv.RNSound.RNSoundPackage;
+import com.rnfs.RNFSPackage;
 
 public class MainActivity extends ReactActivity {
 

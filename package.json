@@ -1,67 +1,69 @@
 {
-	"name": "MusicPlayer",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "NODE_ENV=production ava",
-		"lint:all": "npm run lint && npm run lint:test",
-		"lint": "eslint -c .eslintrc src/**/*.js",
-		"lint:test": "eslint tests/**/*.js",
-		"cleanApk": "rm android/app/build/outputs/apk/*.apk",
-		"assembleRelease": "cd android && ./gradlew assembleRelease && cd ..",
-		"signRelease": "jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore android/app/debug.keystore android/app/build/outputs/apk/app-release-unsigned.apk readgit -storepass 123456",
-		"alignRelease": "/home/prijindal/softwares/android-sdk-linux/build-tools/25.0.1/zipalign -v 4 android/app/build/outputs/apk/app-release-unsigned.apk android/app/build/outputs/apk/app-release.apk",
-		"release": "npm run cleanApk && npm run assembleRelease && npm run signRelease && npm run alignRelease",
-		"emulator": "emulator -avd NexusS",
-		"installAndroid": "adb install android/app/build/outputs/apk/app-release.apk",
-		"intent": "adb shell am start -a android.intent.action.MAIN -n com.starterapp/.MainActivity"
-	},
-	"dependencies": {
-		"@exponent/ex-navigation": "^2.7.1",
-		"color": "^1.0.3",
-		"faker": "^3.1.0",
-		"react": "~15.4.0-rc.4",
-		"react-native": "0.40.0",
-		"react-native-animatable": "^1.1.0",
-		"react-native-uuid": "^1.4.9",
-		"react-native-vector-icons": "^4.0.0",
-		"react-redux": "^5.0.2",
-		"redux": "^3.6.0",
-		"redux-persist": "^4.1.0",
-		"redux-thunk": "^2.2.0",
-		"reduxsauce": "^0.4.1",
-		"seamless-immutable": "^7.0.1"
-	},
-	"devDependencies": {
-		"ava": "^0.17.0",
-		"babel-eslint": "^7.1.1",
-		"babel-preset-react-native": "1.9.1",
-		"babel-preset-react-native-stage-0": "^1.0.1",
-		"enzyme": "^2.7.1",
-		"eslint": "^3.14.0",
-		"eslint-config-airbnb": "^14.0.0",
-		"eslint-plugin-import": "^2.2.0",
-		"eslint-plugin-jsx-a11y": "^3.0.2",
-		"eslint-plugin-react": "^6.9.0",
-		"eslint-plugin-react-native": "^2.2.1",
-		"mockery": "^2.0.0",
-		"nyc": "^10.1.2",
-		"react-native-mock": "^0.2.8",
-		"react-test-renderer": "~15.4.0-rc.4",
-		"remote-redux-devtools": "^0.5.7"
-	},
-	"ava": {
-		"files": [
-			"tests/**/*.js",
-			"!tests/setup.js"
-		],
-		"require": [
-			"babel-register",
-			"babel-polyfill",
-			"react-native-mock/mock",
-			"./tests/setup"
-		],
-		"babel": "inherit"
-	}
+  "name": "MusicPlayer",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "NODE_ENV=production ava",
+    "lint:all": "npm run lint && npm run lint:test",
+    "lint": "eslint -c .eslintrc src/**/*.js",
+    "lint:test": "eslint tests/**/*.js",
+    "cleanApk": "rm android/app/build/outputs/apk/*.apk",
+    "assembleRelease": "cd android && ./gradlew assembleRelease && cd ..",
+    "signRelease": "jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore android/app/debug.keystore android/app/build/outputs/apk/app-release-unsigned.apk readgit -storepass 123456",
+    "alignRelease": "/home/prijindal/softwares/android-sdk-linux/build-tools/25.0.1/zipalign -v 4 android/app/build/outputs/apk/app-release-unsigned.apk android/app/build/outputs/apk/app-release.apk",
+    "release": "npm run cleanApk && npm run assembleRelease && npm run signRelease && npm run alignRelease",
+    "emulator": "emulator -avd NexusS",
+    "installAndroid": "adb install android/app/build/outputs/apk/app-release.apk",
+    "intent": "adb shell am start -a android.intent.action.MAIN -n com.starterapp/.MainActivity"
+  },
+  "dependencies": {
+    "@exponent/ex-navigation": "^2.7.1",
+    "color": "^1.0.3",
+    "faker": "^3.1.0",
+    "react": "~15.4.0-rc.4",
+    "react-native": "0.40.0",
+    "react-native-animatable": "^1.1.0",
+    "react-native-fs": "^2.1.0-rc.1",
+    "react-native-sound": "^0.8.3",
+    "react-native-uuid": "^1.4.9",
+    "react-native-vector-icons": "^4.0.0",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "redux-persist": "^4.1.0",
+    "redux-thunk": "^2.2.0",
+    "reduxsauce": "^0.4.1",
+    "seamless-immutable": "^7.0.1"
+  },
+  "devDependencies": {
+    "ava": "^0.17.0",
+    "babel-eslint": "^7.1.1",
+    "babel-preset-react-native": "1.9.1",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "enzyme": "^2.7.1",
+    "eslint": "^3.14.0",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
+    "eslint-plugin-react-native": "^2.2.1",
+    "mockery": "^2.0.0",
+    "nyc": "^10.1.2",
+    "react-native-mock": "^0.2.8",
+    "react-test-renderer": "~15.4.0-rc.4",
+    "remote-redux-devtools": "^0.5.7"
+  },
+  "ava": {
+    "files": [
+      "tests/**/*.js",
+      "!tests/setup.js"
+    ],
+    "require": [
+      "babel-register",
+      "babel-polyfill",
+      "react-native-mock/mock",
+      "./tests/setup"
+    ],
+    "babel": "inherit"
+  }
 }
