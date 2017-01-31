@@ -37,6 +37,7 @@
 		698E758DA5EE445BAC8B42F9 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAE89C6581C461D9B4FD957 /* libRCTMaterialKit.a */; };
 		4BB6E94CBCDD41AF94BE4354 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E96600FF304C2AAEE9BA10 /* libRNFS.a */; };
 		33375F5A5A194B02BC00D35C /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17BE44B17FE546D5AD199CF2 /* libRNSound.a */; };
+		7B37958FF5094D24A905A20C /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DECC2F041B40F4AF750107 /* libReactNativePermissions.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,6 +266,8 @@
 		18E96600FF304C2AAEE9BA10 /* libRNFS.a */ = {isa = PBXFileReference; name = "libRNFS.a"; path = "libRNFS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		5745227EDCF54DE99E78A50E /* RNSound.xcodeproj */ = {isa = PBXFileReference; name = "RNSound.xcodeproj"; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		17BE44B17FE546D5AD199CF2 /* libRNSound.a */ = {isa = PBXFileReference; name = "libRNSound.a"; path = "libRNSound.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		80B0DA9F49434887BC44C563 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativePermissions.xcodeproj"; path = "../node_modules/react-native-permissions/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		23DECC2F041B40F4AF750107 /* libReactNativePermissions.a */ = {isa = PBXFileReference; name = "libReactNativePermissions.a"; path = "libReactNativePermissions.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +298,7 @@
 				698E758DA5EE445BAC8B42F9 /* libRCTMaterialKit.a in Frameworks */,
 				4BB6E94CBCDD41AF94BE4354 /* libRNFS.a in Frameworks */,
 				33375F5A5A194B02BC00D35C /* libRNSound.a in Frameworks */,
+				7B37958FF5094D24A905A20C /* libReactNativePermissions.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +447,7 @@
 				9C005908C1A84603A9EA3DE9 /* RCTMaterialKit.xcodeproj */,
 				99C3A27AF0DA4E58B8092557 /* RNFS.xcodeproj */,
 				5745227EDCF54DE99E78A50E /* RNSound.xcodeproj */,
+				80B0DA9F49434887BC44C563 /* ReactNativePermissions.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -906,6 +911,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -922,6 +928,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicPlayer.app/MusicPlayer";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);

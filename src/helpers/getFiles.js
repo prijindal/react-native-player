@@ -1,4 +1,5 @@
 import RNFS from 'react-native-fs';
+import MediaMetadataRetriever from '../components/MediaMetadataRetriever';
 
 const checkMusic = (fileInfo) => {
   const splited = fileInfo.path.split('.');
@@ -14,9 +15,22 @@ const checkMusic = (fileInfo) => {
 
 const recursiveFilesGetter = async (fileInfo, files = []) => {
   if (fileInfo.isFile() && checkMusic(fileInfo)) {
+    let metadata;
+    try {
+      metadata = await MediaMetadataRetriever.retrieveMedia(fileInfo.path);
+    } catch (e) {
+      metadata = {
+        title: fileInfo.name,
+      };
+    }
+    console.log(metadata.title);
     return [
       ...files,
-      fileInfo,
+      {
+        ...metadata,
+        name: fileInfo.name,
+        path: fileInfo.path,
+      },
     ];
   } else if (fileInfo.isDirectory()) {
     try {

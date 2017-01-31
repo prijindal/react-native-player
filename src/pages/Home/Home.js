@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { View, ListView, ScrollView } from 'react-native';
+import { View, ListView } from 'react-native';
+import Permissions from 'react-native-permissions';
 import getFiles from '../../helpers/getFiles';
 
 import Layout from '../../components/Layout';
@@ -47,10 +48,14 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    getFiles()
-    .then((files) => {
-      if (!this._mounted) return;
-      this.props.setSongs(files);
+    Permissions.getPermissionStatus('photo')
+    .then((response) => {
+      if (response !== 'authorized') {
+        Permissions.requestPermission('photo')
+        .then(this.getFiles);
+      } else {
+        this.getFiles();
+      }
     });
   }
 
@@ -64,6 +69,20 @@ class Home extends Component {
     this._mounted = false;
   }
 
+  onActionSelected = (position) => {
+    if (position === 0) {
+      this.getFiles();
+    }
+  }
+
+  getFiles = () => {
+    getFiles()
+    .then((files) => {
+      if (!this._mounted) return;
+      this.props.setSongs(files);
+    });
+  }
+
   openSong = (file) => {
     this.props.navigator.push('song', { song: file });
   }
@@ -73,6 +92,10 @@ class Home extends Component {
       <View style={styles.view}>
         <Layout
           title="Home"
+          actions={[{
+            title: 'refresh',
+            iconName: 'refresh',
+          }]}
           onActionSelected={this.onActionSelected}
           navigator={this.props.navigator}
         />
@@ -85,19 +108,21 @@ class Home extends Component {
             />,
           )}
         </ScrollView> */}
-        <ListView
-          dataSource={this.state.dataSource}
-          initialListSize={30}
-          pageSize={1}
-          renderRow={file =>
-            <ListItem
-              key={file.path}
-              item={{ title: file.name }}
-              length={this.props.songs.length}
-              onPress={() => this.openSong(file)}
-            />
-          }
-        />
+        {this.props.songs.length > 0 &&
+          <ListView
+            dataSource={this.state.dataSource}
+            initialListSize={30}
+            pageSize={1}
+            renderRow={file =>
+              <ListItem
+                key={file.path}
+                item={{ title: file.title }}
+                length={this.props.songs.length}
+                onPress={() => this.openSong(file)}
+              />
+            }
+          />
+        }
       </View>
     );
   }

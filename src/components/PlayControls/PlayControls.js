@@ -29,19 +29,34 @@ class PlayControls extends Component {
 
   playSong(props) {
     if (this.path === props.player.path) return;
+    if (this.sound) {
+      this.sound.stop();
+      this.sound = null;
+    }
     this.sound = new Sound(props.player.path, Sound.MAIN_BUNDLE, () => {
+      this.sound.stop();
       this.path = props.player.path;
       this.sound.play();
       this.props.setPlaying(true);
     });
   }
 
+  togglePlay = () => {
+    if (this.props.player.isPlaying) {
+      this.sound.pause();
+    } else {
+      this.sound.play();
+    }
+    this.props.setPlaying(!this.props.player.isPlaying);
+  }
+
   render() {
     let name = 'play-arrow';
+    if (this.props.player.isPlaying) name = 'pause';
     return (
       <View style={styles.container}>
-        <Icon name={name} style={styles.play} size={48} />
-        <Text>Controls</Text>
+        <Icon onPress={this.togglePlay} name={name} style={styles.play} size={48} />
+        <Text>{this.props.player.name}</Text>
       </View>
     );
   }

@@ -4852,6 +4852,10 @@ react-native-mock@^0.2.8:
     react-timer-mixin "^0.13.3"
     warning "^2.1.0"
 
+react-native-permissions@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-0.2.5.tgz#81c3adbb09d9edb6ae320d458ca9c021e03a5aba"
+
 react-native-sound@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-native-sound/-/react-native-sound-0.8.3.tgz#2c0b08dde0c9afee33e6aef3de020f2781c38bed"

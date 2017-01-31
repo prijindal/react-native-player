@@ -70,10 +70,6 @@ const styles = {
     fontSize: 24,
     color: theme.whiteText,
   },
-  fixedView: {
-    elevation: 8,
-    backgroundColor: theme.whiteText,
-  },
 };
 
 class SideBar extends Component {
@@ -83,9 +79,6 @@ class SideBar extends Component {
     }).isRequired,
     closeDrawer: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
-    user: PropTypes.shape({
-      name: PropTypes.string,
-    }).isRequired,
   }
 
   state = {
@@ -152,34 +145,25 @@ class SideBar extends Component {
             <View>
               <List>
                 <MenuItem
-                  item={{ name: 'Inbox', icon: 'inbox' }}
+                  item={{ name: 'All Songs', icon: 'inbox' }}
                   iconColor={theme.primary500}
                   textColor={theme.primary500}
                 />
                 <MenuItem
-                  item={{ name: 'Snoozed', icon: 'access-time' }}
+                  item={{ name: 'Library', icon: 'access-time' }}
                   iconColor={theme.accent700}
                 />
                 <MenuItem
-                  item={{ name: 'Done', icon: 'check' }}
+                  item={{ name: 'Currently Playing', icon: 'check' }}
+                  iconColor={theme.accent700}
+                />
+                <MenuItem
+                  item={{ name: 'Playlists', icon: 'add' }}
                   iconColor={theme.accent700}
                 />
               </List>
               <List>
-                <MenuItem item={{ name: 'Drafts', icon: 'drafts' }} />
-                <MenuItem item={{ name: 'Sent', icon: 'send' }} />
-                <MenuItem item={{ name: 'Reminders', icon: 'touch-app' }} />
-                <MenuItem item={{ name: 'Trash', icon: 'delete' }} />
-                <MenuItem item={{ name: 'Spam', icon: 'error' }} />
-              </List>
-              <List>
-                <MenuItem item={{ name: 'Saved', icon: 'bookmark' }} />
-              </List>
-              <List>
-                <MenuItem item={{ name: 'Create New', icon: 'add' }} />
-                {this.props.user.name !== '' &&
-                  <MenuItem onPress={this.logout} item={{ name: 'Logout', icon: 'power-settings-new' }} />
-                }
+                <MenuItem item={{ name: 'Settings', icon: 'settings' }} />
               </List>
             </View> :
             <List noBorder>
@@ -188,10 +172,6 @@ class SideBar extends Component {
             </List>
           }
         </ScrollView>
-        <View style={styles.fixedView}>
-          <MenuItem onPress={() => this.openPage('settings')} item={{ name: 'Settings', icon: 'settings' }} />
-          <MenuItem item={{ name: 'Help and Feedback', icon: 'help' }} />
-        </View>
       </View>
     );
   }
